@@ -1,13 +1,12 @@
 package com.seveneleven.mycontactsapp;
+import java.util.*;
 public class User {
-
 	protected String name;
 	protected String email;
 	protected String passwordHash;
 	protected String userType;
 	protected UserProfile profile;
 	private String preference;
-
 	public User(String name, String email, String passwordHash, 
 			String userType, UserProfile profile) {
 		this.name = name;
@@ -65,5 +64,18 @@ public class User {
          System.out.println("User Type: " + userType);
          System.out.println("Phone: " +profile.getPhoneNumber());
          System.out.println("City: " + profile.getCity());
+	}
+	private List<Contact> contacts = new ArrayList<>();
+	public void addContact(Contact contact) {
+	    contacts.add(contact);
+	}
+	public void viewContacts() {
+	    if (contacts.isEmpty()) {
+	        System.out.println("No contacts found.");
+	        return;
+	    }
+	    for (Contact c : contacts) {
+	        c.display();
+	    }
 	}
 }
