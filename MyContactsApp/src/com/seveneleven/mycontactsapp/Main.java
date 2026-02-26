@@ -31,7 +31,7 @@ public class Main {
         System.out.println("1. Basic Authentication");
         System.out.println("2. OAuth");
         int choice = sc.nextInt();
-        sc.nextLine(); 
+        sc.nextLine();
         System.out.print("Enter Email: ");
         String loginEmail = sc.nextLine();
         String loginPassword = null;
@@ -45,12 +45,49 @@ public class Main {
             auth = new OAuth();
         }
         boolean success = auth.authenticate(loginEmail, loginPassword);
-        if (success) {
-            User loggedUser = userDatabase.get(loginEmail);
-            System.out.println("Welcome " + loggedUser.getName());
-        } 
-        else {
+        if (!success) {
             System.out.println("Invalid email or password!");
+            return;
+        }
+        User loggedUser = userDatabase.get(loginEmail);
+        System.out.println("Welcome " + loggedUser.getName());
+        System.out.println("\n--- User Profile Management ---");
+        System.out.println("1. Update City");
+        System.out.println("2. Change Password");
+        System.out.println("3. Update Phone");
+        System.out.println("4. Exit");
+        int option = sc.nextInt();
+        sc.nextLine();
+        switch (option) {
+            case 1:
+                System.out.print("Enter New City: ");
+                String newCity = sc.nextLine();
+                loggedUser.updateCity(newCity);
+                System.out.println("City updated successfully!");
+                loggedUser.displayProfile();
+                break;
+            case 2:
+                System.out.print("Enter Old Password: ");
+                String oldPass = sc.nextLine();
+                System.out.print("Enter New Password: ");
+                String newPass = sc.nextLine();
+                if (loggedUser.verifyPassword(oldPass)) {
+                    loggedUser.changePassword(newPass);
+                    System.out.println("Password changed successfully!");
+                } 
+                else {
+                    System.out.println("Incorrect old password!");
+                }
+                break;
+            case 3:
+                System.out.print("Enter New Phone: ");
+                long newPhone = sc.nextLong();
+                loggedUser.updatePhone(newPhone);
+                System.out.println("Phone updated successfully!");
+                loggedUser.displayProfile();
+                break;
+            default:
+                System.out.println("Exiting Profile Management.");
         }
     }
 }
