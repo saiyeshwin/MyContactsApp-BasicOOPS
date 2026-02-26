@@ -51,7 +51,6 @@ public class Main {
         }
         User loggedUser = userDatabase.get(loginEmail);
         System.out.println("Welcome " + loggedUser.getName());
-        System.out.println("\n--- User Profile Management ---");
         System.out.println("1. Update City");
         System.out.println("2. Change Password");
         System.out.println("3. Update Phone");
