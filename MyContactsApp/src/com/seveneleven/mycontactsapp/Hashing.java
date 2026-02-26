@@ -1,5 +1,4 @@
 package com.seveneleven.mycontactsapp;
-
 import java.security.MessageDigest;
 public class Hashing {
     public static String hashPassword(String input) {
@@ -8,7 +7,7 @@ public class Hashing {
             byte[] hashBytes = md.digest(input.getBytes());
             StringBuilder sb = new StringBuilder();
             for (byte b : hashBytes) {
-                sb.append(String.format("%02x", b)); // convert to hex
+                sb.append(String.format("%02x", b));
             }
             return sb.toString();
         }
