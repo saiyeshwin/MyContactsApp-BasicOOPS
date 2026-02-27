@@ -7,6 +7,7 @@ public abstract class Contact {
     protected List<PhoneNumber> phones;
     protected List<Email> emails;
     protected LocalDateTime createdAt;
+
     public Contact(String name) {
         this.id = UUID.randomUUID();
         this.name = name;

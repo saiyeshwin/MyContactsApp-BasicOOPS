@@ -1,7 +1,5 @@
-// Use Case-6: Edit Contact Details
-// User modifies existing contact details
-// User can edit phone numbers and email by selecting index of contact
-// User can also add new phone numbers and email for existing contacts
+// Use Case-7: Delete Contacts
+// User removes a contact from the list of contacts
 // @author Developer
 // @version 6.0
 package com.seveneleven.mycontactsapp;
@@ -65,7 +63,9 @@ public class Main {
             System.out.println("5. View Contacts");
             System.out.println("6. Search Contact");
             System.out.println("7. Edit Contact");
-            System.out.println("8. Exit");
+            System.out.println("8. Delete Contact");
+            System.out.println("9. Exit");
+
 
             int option = sc.nextInt();
             sc.nextLine();
@@ -254,8 +254,38 @@ public class Main {
 
                     System.out.println("Contact updated successfully!");
                     break;
-
                 case 8:
+                    List<Contact> contactsToDelete = loggedUser.getContacts();
+                    if (contactsToDelete.isEmpty()) {
+                        System.out.println("No contacts available to delete.");
+                        break;
+                    }
+
+                    System.out.print("Enter contact name to delete: ");
+                    String deleteName = sc.nextLine();
+                    Contact targetDelete = null;
+                    for (Contact c : contactsToDelete) {
+                        if (c.getName().equalsIgnoreCase(deleteName)) {
+                            targetDelete = c;
+                            break;
+                        }
+                    }
+
+                    if (targetDelete == null) {
+                        System.out.println("Contact not found!");
+                        break;
+                    }
+                    System.out.print("Are you sure you want to delete " + targetDelete.getName() + "? (Y/N): ");
+                    String confirm = sc.nextLine();
+                    if (confirm.equalsIgnoreCase("Y")) {
+                        contactsToDelete.remove(targetDelete);
+                        System.out.println("Contact deleted successfully!");
+                    } else {
+                        System.out.println("Deletion cancelled.");
+                    }
+                    break;
+
+                case 9:
                     System.out.println("Exiting");
                     return;
            
