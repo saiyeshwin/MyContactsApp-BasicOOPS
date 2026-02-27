@@ -78,4 +78,8 @@ public class User {
 	        c.display();
 	    }
 	}
+	public List<Contact> getContacts(){
+		return contacts;
+	}
+	
 }

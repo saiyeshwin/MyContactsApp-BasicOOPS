@@ -9,4 +9,12 @@ public class PhoneNumber {
     public String toString() {
         return type + ": " + number;
     }
+	public String getNumber() {
+		// TODO Auto-generated method stub
+		return number;
+	}
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
 }

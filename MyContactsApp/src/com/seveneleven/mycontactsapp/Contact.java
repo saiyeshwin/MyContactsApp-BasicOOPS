@@ -21,4 +21,35 @@ public abstract class Contact {
         emails.add(email);
     }
     public abstract void display();
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public List<PhoneNumber> getPhones() {
+		return phones;
+	}
+	public void setPhones(List<PhoneNumber> phones) {
+		this.phones = phones;
+	}
+	public List<Email> getEmails() {
+		return emails;
+	}
+	public void setEmails(List<Email> emails) {
+		this.emails = emails;
+	}
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+    
 }

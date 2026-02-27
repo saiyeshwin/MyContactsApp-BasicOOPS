@@ -9,4 +9,12 @@ public class Email {
     public String toString() {
         return type + ": " + email;
     }
+	public String getAddress() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+	public String getType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
 }

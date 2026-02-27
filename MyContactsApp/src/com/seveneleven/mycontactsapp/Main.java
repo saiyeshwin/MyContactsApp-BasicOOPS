@@ -1,3 +1,7 @@
+// Use Case-5: View Contact Details
+// User can view complete information of a specific contact
+// @author Developer
+// @version 5.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
@@ -57,7 +61,8 @@ public class Main {
             System.out.println("3. Update Phone");
             System.out.println("4. Create Contact");
             System.out.println("5. View Contacts");
-            System.out.println("6. Exit");
+            System.out.println("6. Search Contact");
+            System.out.println("7. Exit");
 
             int option = sc.nextInt();
             sc.nextLine();
@@ -121,12 +126,34 @@ public class Main {
                     break;
 
                 case 5:
-                    loggedUser.viewContacts();
+                	loggedUser.viewContacts();
+                    break;
+                case 6:
+                    List<Contact> contacts = loggedUser.getContacts();
+                    if (contacts.isEmpty()) {
+                        System.out.println("No contacts found.");
+                    } else {
+                        System.out.print("Enter contact name to view: ");
+                        String searchName = sc.nextLine();
+                        boolean found = false;
+                        for (Contact c : contacts) {
+                            if (c.getName().equalsIgnoreCase(searchName)) {
+                                ContactView view = new ContactView(c);
+                                System.out.println(view.getFormattedDetails());
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            System.out.println("Contact not found!");
+                        }
+                    }
                     break;
 
-                case 6:
+                case 7:
                     System.out.println("Exiting");
                     return;
+               
 
                 default:
                     System.out.println("Invalid option");

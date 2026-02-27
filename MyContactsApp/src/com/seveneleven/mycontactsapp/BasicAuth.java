@@ -23,8 +23,6 @@ public class BasicAuth implements Authentication {
 
         if (user.getPasswordHash().equals(hashedPassword)) {
             System.out.println("Login successful!");
-            //Session session = new Session(email); // create a new session
-            // You can now pass this session around instead of relying on Singleton
             return true;
         } else {
             System.out.println("Invalid password!");
