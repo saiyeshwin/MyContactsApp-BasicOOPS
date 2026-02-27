@@ -14,6 +14,18 @@ public abstract class Contact {
         this.emails = new ArrayList<>();
         this.createdAt = LocalDateTime.now();
     }
+    public Contact(Contact other) {
+        this.name = other.name;
+        this.phones = new ArrayList<>();
+        for (PhoneNumber p : other.phones) {
+            this.phones.add(new PhoneNumber(p)); // deep copy
+        }
+        this.emails = new ArrayList<>();
+        for (Email e : other.emails) {
+            this.emails.add(new Email(e)); // deep copy
+        }
+    }
+
     public void addPhone(PhoneNumber phone) {
         phones.add(phone);
     }

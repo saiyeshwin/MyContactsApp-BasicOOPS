@@ -1,7 +1,9 @@
-// Use Case-5: View Contact Details
-// User can view complete information of a specific contact
+// Use Case-6: Edit Contact Details
+// User modifies existing contact details
+// User can edit phone numbers and email by selecting index of contact
+// User can also add new phone numbers and email for existing contacts
 // @author Developer
-// @version 5.0
+// @version 6.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
@@ -38,7 +40,7 @@ public class Main {
         sc.nextLine();
         System.out.print("Enter Email: ");
         String loginEmail = sc.nextLine();
-        String loginPassword = null;
+        String loginPassword=null;
         Authentication auth;
         if (choice == 1) {
             System.out.print("Enter Password: ");
@@ -62,7 +64,8 @@ public class Main {
             System.out.println("4. Create Contact");
             System.out.println("5. View Contacts");
             System.out.println("6. Search Contact");
-            System.out.println("7. Exit");
+            System.out.println("7. Edit Contact");
+            System.out.println("8. Exit");
 
             int option = sc.nextInt();
             sc.nextLine();
@@ -151,10 +154,111 @@ public class Main {
                     break;
 
                 case 7:
+                    System.out.print("Enter contact name to modify: ");
+                    String modifyName = sc.nextLine();
+                    Contact target = null;
+                    for (Contact c : loggedUser.getContacts()) {
+                        if (c.getName().equalsIgnoreCase(modifyName)) {
+                            target = c;
+                            break;
+                        }
+                    }
+                    if (target == null) {
+                        System.out.println("Contact not found!");
+                        break;
+                    }
+
+                    System.out.println("Choose field to modify:");
+                    System.out.println("1. Add Phone");
+                    System.out.println("2. Add Email");
+                    System.out.println("3. Update Name");
+                    System.out.println("4. Edit Existing Phone"); 
+                    System.out.println("5. Edit Existing Email");
+                    
+                    int modChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (modChoice) {
+                        case 1:
+                            System.out.print("Enter Phone: ");
+                            String newPhoneNumber = sc.nextLine();
+                            System.out.print("Enter Type (Home/Work/Mobile): ");
+                            String typePhone = sc.nextLine();
+                            target.addPhone(new PhoneNumber(newPhoneNumber, typePhone));
+                            break;
+                        case 2:
+                            System.out.print("Enter Email: ");
+                            String newEmail = sc.nextLine();
+                            System.out.print("Enter Type (Personal/Work): ");
+                            String typeEmail = sc.nextLine();
+                            target.addEmail(new Email(newEmail, typeEmail));
+                            break;
+                        case 3:
+                            System.out.print("Enter New Name: ");
+                            String newName = sc.nextLine();
+                            target.setName(newName);
+                            break;
+                        case 4:
+                            List<PhoneNumber> phones = target.getPhones();
+                            if (phones.isEmpty()) {
+                                System.out.println("No phones to edit.");
+                                break;
+                            }
+                            for (int i = 0; i < phones.size(); i++) {
+                                System.out.println((i+1) + ". " + phones.get(i).toString());
+                            }
+                            System.out.print("Choose phone index to edit: ");
+                            int phoneIndex = sc.nextInt() - 1;
+                            sc.nextLine();
+                            if (phoneIndex < 0 || phoneIndex >= phones.size()) {
+                                System.out.println("Invalid index!");
+                                break;
+                            }
+                            System.out.print("Enter new phone number: ");
+                            String newPhoneNum = sc.nextLine();
+                            System.out.print("Enter new type (Home/Work/Mobile): ");
+                            String newPhoneType = sc.nextLine();
+                            phones.get(phoneIndex).setNumber(newPhoneNum);
+                            phones.get(phoneIndex).setType(newPhoneType);
+                            System.out.println("Phone updated successfully!");
+                            break;
+
+                        case 5:
+                            List<Email> emails = target.getEmails();
+                            if (emails.isEmpty()) {
+                                System.out.println("No emails to edit.");
+                                break;
+                            }
+                            for (int i = 0; i < emails.size(); i++) {
+                                System.out.println((i+1) + ". " + emails.get(i).toString());
+                            }
+                            System.out.print("Choose email index to edit: ");
+                            int emailIndex = sc.nextInt() - 1;
+                            sc.nextLine();
+                            if (emailIndex < 0 || emailIndex >= emails.size()) {
+                                System.out.println("Invalid index!");
+                                break;
+                            }
+                            System.out.print("Enter new email address: ");
+                            String newEmailAddr = sc.nextLine();
+                            System.out.print("Enter new type (Personal/Work): ");
+                            String newEmailType = sc.nextLine();
+                            emails.get(emailIndex).setEmail(newEmailAddr);
+                            emails.get(emailIndex).setType(newEmailType);
+                            System.out.println("Email updated successfully!");
+                            break;
+
+                        default:
+                            System.out.println("Invalid choice!");
+                    }
+
+                    System.out.println("Contact updated successfully!");
+                    break;
+
+                case 8:
                     System.out.println("Exiting");
                     return;
-               
-
+           
                 default:
                     System.out.println("Invalid option");
             }

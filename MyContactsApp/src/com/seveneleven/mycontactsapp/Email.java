@@ -6,7 +6,11 @@ public class Email {
         this.email = email;
         this.type = type;
     }
-    public String toString() {
+    public Email(Email e) {
+		// TODO Auto-generated constructor stub
+    	this.email=e.email;
+	}
+	public String toString() {
         return type + ": " + email;
     }
 	public String getAddress() {
@@ -17,4 +21,14 @@ public class Email {
 		// TODO Auto-generated method stub
 		return type;
 	}
+	public void setEmail(String email) {
+	    if (!email.contains("@")) {
+	        throw new IllegalArgumentException("Invalid email");
+	    }
+	    this.email = email;
+	}
+	public void setType(String type) {
+	    this.type = type;
+	}
+
 }

@@ -6,7 +6,11 @@ public class PhoneNumber {
         this.number = number;
         this.type = type;
     }
-    public String toString() {
+    public PhoneNumber(PhoneNumber phone) {
+		// TODO Auto-generated constructor stub
+    	this.number=phone.number;
+	}
+	public String toString() {
         return type + ": " + number;
     }
 	public String getNumber() {
@@ -16,5 +20,14 @@ public class PhoneNumber {
 	public String getType() {
 		// TODO Auto-generated method stub
 		return type;
+	}
+	public void setNumber(String newPhoneNum) {
+		// TODO Auto-generated method stub
+		this.number=newPhoneNum;
+	}
+	public void setType(String newPhoneType) {
+		// TODO Auto-generated method stub
+		this.type=newPhoneType;
+		
 	}
 }

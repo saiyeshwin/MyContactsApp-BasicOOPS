@@ -1,9 +1,19 @@
 package com.seveneleven.mycontactsapp;
+
+import java.util.ArrayList;
+
 public class Person extends Contact {
     public Person(String name) {
         super(name);
     }
-    public void display() {
+    public void setName(String newName) {
+        if (newName == null || newName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        }
+        this.name = newName;
+    }
+
+	public void display() {
         System.out.println("Person Contact");
         System.out.println("ID: " + id);
         System.out.println("Name: " + name);
