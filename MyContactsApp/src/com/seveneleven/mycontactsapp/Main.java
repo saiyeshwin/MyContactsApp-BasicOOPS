@@ -1,3 +1,9 @@
+// Use Case-2: User Authentication
+// User logs in with credentials to access their contact list
+// Password is hashed using MessageDigest (SHA-256)
+// User can select to login using BasicAuth or OAuth
+// @author Developer
+// @version 2.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
