@@ -1,3 +1,8 @@
+// Use Case-4: Create Contact
+// User adds a new contact with name, phone numbers, email addresses
+// It uses list,LocalDateTime for timestamps, UUID for unique IDs
+// @author Developer
+// @version 4.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
