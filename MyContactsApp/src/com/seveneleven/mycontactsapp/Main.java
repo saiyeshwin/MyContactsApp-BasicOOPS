@@ -1,7 +1,7 @@
 // Use Case-7: Delete Contacts
 // User removes a contact from the list of contacts
 // @author Developer
-// @version 6.0
+// @version 7.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
