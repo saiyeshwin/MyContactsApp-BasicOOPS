@@ -1,3 +1,8 @@
+// Use Case-3: User Profile Management
+// User updates profile information,changes password,or manages preferences
+// User can update city, phone number, password
+// @author Developer
+// @version 3.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
