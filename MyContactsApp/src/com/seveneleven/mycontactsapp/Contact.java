@@ -19,11 +19,11 @@ public abstract class Contact {
         this.name = other.name;
         this.phones = new ArrayList<>();
         for (PhoneNumber p : other.phones) {
-            this.phones.add(new PhoneNumber(p)); // deep copy
+            this.phones.add(new PhoneNumber(p));
         }
         this.emails = new ArrayList<>();
         for (Email e : other.emails) {
-            this.emails.add(new Email(e)); // deep copy
+            this.emails.add(new Email(e));
         }
     }
 
@@ -64,5 +64,6 @@ public abstract class Contact {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+	public abstract String getContactType();
     
 }

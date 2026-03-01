@@ -5,6 +5,14 @@ public class Organization extends Contact {
         super(name);
         this.registrationNumber = registrationNumber;
     }
+    public Organization(String name) {
+		// TODO Auto-generated constructor stub
+    	 super(name);
+    	
+	}
+	public String getContactType(){
+    	return "ORGANIZATION";
+    }
     public void display() {
         System.out.println("Organization Contact");
         System.out.println("ID: " + id);

@@ -1,7 +1,7 @@
-// Use Case-7: Delete Contacts
+// Use Case-8: Bulk Operations
 // User removes a contact from the list of contacts
 // @author Developer
-// @version 6.0
+// @version 8.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
@@ -64,7 +64,8 @@ public class Main {
             System.out.println("6. Search Contact");
             System.out.println("7. Edit Contact");
             System.out.println("8. Delete Contact");
-            System.out.println("9. Exit");
+            System.out.println("9. Bul Operations");
+            System.out.println("10. Exit");
 
 
             int option = sc.nextInt();
@@ -100,9 +101,23 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.print("Enter Contact Name: ");
-                    String contactName = sc.nextLine();
-                    Contact contact = new Person(contactName);          
+                	System.out.print("Enter Contact Name: ");
+                	String contactName = sc.nextLine();
+                	System.out.print("Enter Contact Type (1. Person  2. Organization): ");
+                	int contactTypeChoice = sc.nextInt();
+                	sc.nextLine();
+                	Contact contact;
+                	if (contactTypeChoice == 1) {
+                	    contact = new Person(contactName);
+                	} 
+                	else if (contactTypeChoice == 2) {
+                	    contact = new Organization(contactName);
+                	} 
+                	else {
+                	    System.out.println("Invalid type. Defaulting to Person.");
+                	    contact = new Person(contactName);
+                	}
+       
                     System.out.print("How many phone numbers? ");
                     int phoneCount = sc.nextInt();
                     sc.nextLine();
@@ -222,7 +237,6 @@ public class Main {
                             phones.get(phoneIndex).setType(newPhoneType);
                             System.out.println("Phone updated successfully!");
                             break;
-
                         case 5:
                             List<Email> emails = target.getEmails();
                             if (emails.isEmpty()) {
@@ -251,7 +265,6 @@ public class Main {
                         default:
                             System.out.println("Invalid choice!");
                     }
-
                     System.out.println("Contact updated successfully!");
                     break;
                 case 8:
@@ -260,7 +273,6 @@ public class Main {
                         System.out.println("No contacts available to delete.");
                         break;
                     }
-
                     System.out.print("Enter contact name to delete: ");
                     String deleteName = sc.nextLine();
                     Contact targetDelete = null;
@@ -284,11 +296,60 @@ public class Main {
                         System.out.println("Deletion cancelled.");
                     }
                     break;
-
+                    
                 case 9:
+                    BulkOperations bulkService = new BulkOperations();
+                    List<Contact> contactList = loggedUser.getContacts();
+                    if (contactList.isEmpty()) {
+                        System.out.println("No contacts available.");
+                        break;
+                    }
+
+                    System.out.println("Contact List:");
+                    for (int i = 0; i < contactList.size(); i++) {
+                        System.out.println((i + 1) + ". " + contactList.get(i).getName());
+                    }
+                    System.out.println("1. Show All Persons");
+                    System.out.println("2. Show All Organizations");
+                    System.out.println("3. Export All Contacts");
+                    System.out.println("4. Bulk Delete (Select Indexes)");
+                    System.out.print("Choose option:");
+
+                    int bulkChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    switch (bulkChoice) {
+                        case 1:
+                            bulkService.showAllPersons(contactList);
+                            break;
+                        case 2:
+                            bulkService.showAllOrganizations(contactList);
+                            break;
+                        case 3:
+                            bulkService.exportAllContacts(contactList);
+                            break;
+                        case 4:
+                            System.out.print("Enter indexes separated by space:");
+                            String input = sc.nextLine();
+                            String[] parts = input.split(" ");
+                            List<Integer> indexes = new ArrayList<>();
+                            for (String part : parts) {
+                                try {
+                                    int idx = Integer.parseInt(part) - 1;
+                                    indexes.add(idx);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Invalid number: " + part);
+                                }
+                            }
+                            bulkService.bulkDeleteByIndexes(contactList, indexes);
+                            break;
+                        default:
+                            System.out.println("Invalid bulk option.");
+                    }
+                    break;
+                case 10:
                     System.out.println("Exiting");
                     return;
-           
                 default:
                     System.out.println("Invalid option");
             }

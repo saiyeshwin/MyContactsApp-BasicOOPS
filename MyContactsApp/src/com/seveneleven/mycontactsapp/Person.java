@@ -12,7 +12,9 @@ public class Person extends Contact {
         }
         this.name = newName;
     }
-
+    public String getContactType(){
+    	return "PERSON";
+    }
 	public void display() {
         System.out.println("Person Contact");
         System.out.println("ID: " + id);
