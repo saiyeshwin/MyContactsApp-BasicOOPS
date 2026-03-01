@@ -2,41 +2,41 @@ package com.seveneleven.mycontactsapp;
 import java.time.LocalDateTime;
 import java.util.*;
 public abstract class Contact {
-    protected UUID id;
-    protected String name;
-    protected List<PhoneNumber> phones;
-    protected List<Email> emails;
-    protected LocalDateTime createdAt;
-    private Date dateAdded = new Date();
-    private int contactCount = 0;
-    private Set<String> tags = new HashSet<>();
+	protected UUID id;
+	protected String name;
+	protected List<PhoneNumber> phones;
+	protected List<Email> emails;
+	protected LocalDateTime createdAt;
+	private Date dateAdded = new Date();
+	private int contactCount = 0;
+	private Set<Tag> tags = new HashSet<>();
 
-    public Contact(String name) {
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.phones = new ArrayList<>();
-        this.emails = new ArrayList<>();
-        this.createdAt = LocalDateTime.now();
-    }
-    public Contact(Contact other) {
-        this.name = other.name;
-        this.phones = new ArrayList<>();
-        for (PhoneNumber p : other.phones) {
-            this.phones.add(new PhoneNumber(p));
-        }
-        this.emails = new ArrayList<>();
-        for (Email e : other.emails) {
-            this.emails.add(new Email(e));
-        }
-    }
+	public Contact(String name) {
+		this.id = UUID.randomUUID();
+		this.name = name;
+		this.phones = new ArrayList<>();
+		this.emails = new ArrayList<>();
+		this.createdAt = LocalDateTime.now();
+	}
+	public Contact(Contact other) {
+		this.name = other.name;
+		this.phones = new ArrayList<>();
+		for (PhoneNumber p : other.phones) {
+			this.phones.add(new PhoneNumber(p));
+		}
+		this.emails = new ArrayList<>();
+		for (Email e : other.emails) {
+			this.emails.add(new Email(e));
+		}
+	}
 
-    public void addPhone(PhoneNumber phone) {
-        phones.add(phone);
-    }
-    public void addEmail(Email email) {
-        emails.add(email);
-    }
-    public abstract void display();
+	public void addPhone(PhoneNumber phone) {
+		phones.add(phone);
+	}
+	public void addEmail(Email email) {
+		emails.add(email);
+	}
+	public abstract void display();
 	public UUID getId() {
 		return id;
 	}
@@ -69,24 +69,21 @@ public abstract class Contact {
 	}
 	public abstract String getContactType();
 	public Date getDateAdded() {
-	    return dateAdded;
+		return dateAdded;
 	}
 
 	public int getContactCount() {
-	    return contactCount;
+		return contactCount;
 	}
 
 	public void incrementContactCount() {
-	    contactCount++;
+		contactCount++;
 	}
 
-	public Set<String> getTags() {
-	    return tags;
+	public Set<Tag> getTags() {
+		return tags;
 	}
-
-	public void addTag(String tag) {
-	    tags.add(tag);
+	public void addTag(Tag tag) {
+		tags.add(tag);
 	}
-
-    
 }

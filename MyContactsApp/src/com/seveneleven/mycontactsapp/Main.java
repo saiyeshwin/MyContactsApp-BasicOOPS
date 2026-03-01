@@ -1,7 +1,8 @@
-// Use Case-10: Filter Contacts
-// User can filter contacts by date, frequently contacted
+// Use Case-11: Create and Manage Tags
+// User can create, view, and delete custom tags (e.g., Family, Work, Friends)
+// Tags are stored uniquely using a Set collection
 // @author Developer
-// @version 10.0
+// @version 11.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
@@ -66,7 +67,8 @@ public class Main {
             System.out.println("8. Delete Contact");
             System.out.println("9. Bulk Operations");
             System.out.println("10. Basic Filtering");
-            System.out.println("11. Exit");
+            System.out.println("11. Tags");
+            System.out.println("12. Exit");
 
             int option = sc.nextInt();
             sc.nextLine();            
@@ -404,6 +406,44 @@ public class Main {
 
                     break;
                 case 11:
+                    System.out.println("TAGS");
+                    System.out.println("1. Create Tag");
+                    System.out.println("2. View All Tags");
+                    System.out.println("3. Delete Tag");
+                    System.out.print("Choose option: ");
+                    int tagChoice = sc.nextInt();
+                    sc.nextLine();
+                    switch (tagChoice) {
+                        case 1:
+                            System.out.print("Enter tag name: ");
+                            String tagName = sc.nextLine();
+                            Tag newTag = new Tag(tagName);
+                            loggedUser.addTag(newTag);
+                            System.out.println("Tag created successfully!");
+                            break;
+                        case 2:
+                            if (loggedUser.getTags().isEmpty()) {
+                                System.out.println("No tags available.");
+                            } 
+                            else {
+                                System.out.println("Available Tags:");
+                                for (Tag tag : loggedUser.getTags()) {
+                                    System.out.println(tag.getName());
+                                }
+                            }
+                            break;
+                        case 3:
+                            System.out.print("Enter tag name to delete: ");
+                            String deleteTagName = sc.nextLine();
+                            Tag deleteTag = new Tag(deleteTagName);
+                            loggedUser.removeTag(deleteTag);
+                            System.out.println("Tag removed (if existed).");
+                            break;
+                        default:
+                            System.out.println("Invalid option.");
+                    }
+                    break;
+                case 12:
                     System.out.println("Exiting");
                     return;
                 default:

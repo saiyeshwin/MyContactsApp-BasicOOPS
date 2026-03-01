@@ -81,5 +81,14 @@ public class User {
 	public List<Contact> getContacts(){
 		return contacts;
 	}
-	
+	private Set<Tag> tags = new HashSet<>();
+	public Set<Tag> getTags() {
+	    return tags;
+	}
+	public void addTag(Tag tag) {
+	    tags.add(tag);
+	}
+	public void removeTag(Tag tag) {
+	    tags.remove(tag);
+	}
 }
