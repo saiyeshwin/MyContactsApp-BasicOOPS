@@ -1,5 +1,5 @@
-// Use Case-9: Search Filter Contacts
-// User can search and filter contacts by phone, email, name
+// Use Case-9: Search Contacts
+// User can search contacts by phone, email, name
 // @author Developer
 // @version 9.0
 package com.seveneleven.mycontactsapp;
@@ -7,7 +7,7 @@ import java.util.*;
 public class Main {
     private static Map<String, User> userDatabase = new HashMap<>();
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc=new Scanner(System.in);
         UserRegistration registration = new UserRegistration();
         System.out.print("Enter Name: ");
         String name = sc.nextLine();
@@ -64,7 +64,7 @@ public class Main {
             System.out.println("6. Search Contact");
             System.out.println("7. Edit Contact");
             System.out.println("8. Delete Contact");
-            System.out.println("9. Bul Operations");
+            System.out.println("9. Bulk Operations");
             System.out.println("10. Exit");
 
 
@@ -147,25 +147,53 @@ public class Main {
                 	loggedUser.viewContacts();
                     break;
                 case 6:
+
                     List<Contact> contacts = loggedUser.getContacts();
+
                     if (contacts.isEmpty()) {
                         System.out.println("No contacts found.");
+                        break;
+                    }
+
+                    System.out.println("SEARCH CONTACT ");
+                    System.out.println("1. Search By Name");
+                    System.out.println("2. Search By Phone");
+                    System.out.println("3. Search By Email");
+                    System.out.print("Choose option: ");
+
+                    int searchChoice = sc.nextInt();
+                    sc.nextLine();
+
+                    System.out.print("Enter search keyword: ");
+                    String keyword = sc.nextLine();
+
+                    ContactSearch searchStrategy = null;
+
+                    if (searchChoice == 1) {
+                        searchStrategy = new SearchByName();
+                    } 
+                    else if (searchChoice == 2) {
+                        searchStrategy = new SearchByPhone();
+                    } 
+                    else if (searchChoice == 3) {
+                        searchStrategy = new SearchByEmail();
+                    } 
+                    else {
+                        System.out.println("Invalid search option.");
+                        break;
+                    }
+
+                    List<Contact> results = searchStrategy.search(contacts, keyword);
+
+                    if (results.isEmpty()) {
+                        System.out.println("No matching contacts found.");
                     } else {
-                        System.out.print("Enter contact name to view: ");
-                        String searchName = sc.nextLine();
-                        boolean found = false;
-                        for (Contact c : contacts) {
-                            if (c.getName().equalsIgnoreCase(searchName)) {
-                                ContactView view = new ContactView(c);
-                                System.out.println(view.getFormattedDetails());
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            System.out.println("Contact not found!");
+                        System.out.println("---- Search Results ----");
+                        for (Contact c : results) {
+                            System.out.println(c.getName());
                         }
                     }
+
                     break;
 
                 case 7:
