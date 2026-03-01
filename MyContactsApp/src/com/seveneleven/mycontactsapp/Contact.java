@@ -7,6 +7,9 @@ public abstract class Contact {
     protected List<PhoneNumber> phones;
     protected List<Email> emails;
     protected LocalDateTime createdAt;
+    private Date dateAdded = new Date();
+    private int contactCount = 0;
+    private Set<String> tags = new HashSet<>();
 
     public Contact(String name) {
         this.id = UUID.randomUUID();
@@ -65,5 +68,25 @@ public abstract class Contact {
 		this.createdAt = createdAt;
 	}
 	public abstract String getContactType();
+	public Date getDateAdded() {
+	    return dateAdded;
+	}
+
+	public int getContactCount() {
+	    return contactCount;
+	}
+
+	public void incrementContactCount() {
+	    contactCount++;
+	}
+
+	public Set<String> getTags() {
+	    return tags;
+	}
+
+	public void addTag(String tag) {
+	    tags.add(tag);
+	}
+
     
 }

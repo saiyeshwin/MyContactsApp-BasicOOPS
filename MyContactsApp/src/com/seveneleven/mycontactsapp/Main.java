@@ -1,7 +1,7 @@
-// Use Case-9: Search Contacts
-// User can search contacts by phone, email, name
+// Use Case-10: Filter Contacts
+// User can filter contacts by date, frequently contacted
 // @author Developer
-// @version 9.0
+// @version 10.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
@@ -65,12 +65,11 @@ public class Main {
             System.out.println("7. Edit Contact");
             System.out.println("8. Delete Contact");
             System.out.println("9. Bulk Operations");
-            System.out.println("10. Exit");
-
+            System.out.println("10. Basic Filtering");
+            System.out.println("11. Exit");
 
             int option = sc.nextInt();
-            sc.nextLine();
-            
+            sc.nextLine();            
             switch (option) {
                 case 1:
                     System.out.print("Enter New City: ");
@@ -147,14 +146,11 @@ public class Main {
                 	loggedUser.viewContacts();
                     break;
                 case 6:
-
                     List<Contact> contacts = loggedUser.getContacts();
-
                     if (contacts.isEmpty()) {
                         System.out.println("No contacts found.");
                         break;
                     }
-
                     System.out.println("SEARCH CONTACT ");
                     System.out.println("1. Search By Name");
                     System.out.println("2. Search By Phone");
@@ -163,12 +159,9 @@ public class Main {
 
                     int searchChoice = sc.nextInt();
                     sc.nextLine();
-
                     System.out.print("Enter search keyword: ");
                     String keyword = sc.nextLine();
-
                     ContactSearch searchStrategy = null;
-
                     if (searchChoice == 1) {
                         searchStrategy = new SearchByName();
                     } 
@@ -182,18 +175,16 @@ public class Main {
                         System.out.println("Invalid search option.");
                         break;
                     }
-
                     List<Contact> results = searchStrategy.search(contacts, keyword);
-
                     if (results.isEmpty()) {
                         System.out.println("No matching contacts found.");
-                    } else {
+                    } 
+                    else {
                         System.out.println("---- Search Results ----");
                         for (Contact c : results) {
                             System.out.println(c.getName());
                         }
                     }
-
                     break;
 
                 case 7:
@@ -217,10 +208,8 @@ public class Main {
                     System.out.println("3. Update Name");
                     System.out.println("4. Edit Existing Phone"); 
                     System.out.println("5. Edit Existing Email");
-                    
                     int modChoice = sc.nextInt();
                     sc.nextLine();
-
                     switch (modChoice) {
                         case 1:
                             System.out.print("Enter Phone: ");
@@ -376,6 +365,45 @@ public class Main {
                     }
                     break;
                 case 10:
+                    List<Contact> contactsList = loggedUser.getContacts();
+                    if (contactsList.isEmpty()) {
+                        System.out.println("No contacts available.");
+                        break;
+                    }
+                    System.out.println("FILTER ");
+                    System.out.println("1. Filter By Tag");
+                    System.out.println("2. Recently Added");
+                    System.out.println("3. Frequently Contacted");
+                    System.out.print("Choose option: ");
+                    int filterChoice = sc.nextInt();
+                    sc.nextLine();
+                    ContactFilter filter = null;
+                    if (filterChoice == 1) {
+                        System.out.print("Enter tag: ");
+                        String tag = sc.nextLine();
+                        filter = new FilterByTag(tag);
+
+                    } 
+                    else if (filterChoice == 2) {
+                        filter = new FilterByRecent();
+                    } 
+                    else if (filterChoice == 3) {
+                        filter = new FilterByFrequency();
+                    } 
+                    else {
+                        System.out.println("Invalid filter option.");
+                        break;
+                    }
+                    List<Contact> filteredResults = filter.filter(contactsList);
+
+                    System.out.println("Filter Results:");
+
+                    for (Contact c : filteredResults) {
+                        System.out.println(c.getName());
+                    }
+
+                    break;
+                case 11:
                     System.out.println("Exiting");
                     return;
                 default:
