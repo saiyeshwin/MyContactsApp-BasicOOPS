@@ -1,7 +1,7 @@
-// Use Case-8: Bulk Operations
-// User can perform bulk operations on a list of contacts
+// Use Case-9: Search Filter Contacts
+// User can search and filter contacts by phone, email, name
 // @author Developer
-// @version 8.0
+// @version 9.0
 package com.seveneleven.mycontactsapp;
 import java.util.*;
 public class Main {
