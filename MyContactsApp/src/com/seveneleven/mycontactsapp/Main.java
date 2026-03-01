@@ -1,5 +1,5 @@
 // Use Case-8: Bulk Operations
-// User removes a contact from the list of contacts
+// User can perform bulk operations on a list of contacts
 // @author Developer
 // @version 8.0
 package com.seveneleven.mycontactsapp;
